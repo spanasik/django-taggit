@@ -39,7 +39,6 @@ class TagBase(models.Model):
                     transaction.savepoint_commit(sid, **trans_kwargs)
                     return res
                 except IntegrityError:
-                    transaction.savepoint_rollback(sid, **trans_kwargs)
                     self.slug = self.slugify(self.name, i)
         else:
             return super(TagBase, self).save(*args, **kwargs)
